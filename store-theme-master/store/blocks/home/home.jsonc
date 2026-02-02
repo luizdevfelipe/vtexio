@@ -11,6 +11,7 @@
       "info-card#home",
       "info-card#left",
       "flex-layout.row#test",
+      "slider-layout#home",
       "rich-text#question",
       "rich-text#link",
       "newsletter"
