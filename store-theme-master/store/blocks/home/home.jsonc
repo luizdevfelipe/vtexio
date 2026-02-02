@@ -9,14 +9,52 @@
       "rich-text#shelf-title",
       "flex-layout.row#shelf",
       "info-card#home",
+      "info-card#left",
+      "flex-layout.row#test",
       "rich-text#question",
       "rich-text#link",
       "newsletter"
     ]
   },
+  "flex-layout.row#test": {
+    "children": [
+      "info-card#rethink",
+      "flex-layout.col#test"
+    ]
+  },
+  "info-card#rethink": {
+    "props": {
+      "imageUrl": "https://appliancetheme.vteximg.com.br/arquivos/utensilios-cozinha-min.png",
+      "isFullModeStyle": true,
+      "headline": "Time to rethink your kitchen",
+      "callToActionText": "Discover",
+      "textPosition": "center"
+    }
+  },
+  "flex-layout.col#test": {
+    "children": [
+      "image#electronics",
+      "image#major-appliance"
+    ]
+  },
+  "image#electronics": {
+    "props": {
+      "src": "https://appliancetheme.vteximg.com.br/assets/vtex.file-manager-graphql/images/electronics_banner___25d69b49f8224b369375e68513b4d593.png",
+      "maxWidth": "100%"
+    }
+  },
+  "image#major-appliance": {
+    "props": {
+      "src": "https://appliancetheme.vteximg.com.br/assets/vtex.file-manager-graphql/images/major_appliance_banner___bb10093866a127345ddfbcca3efa5022.png",
+      "maxWidth": "100%"
+    }
+  },
+
 
   "list-context.image-list#demo": {
-    "children": ["slider-layout#demo-images"],
+    "children": [
+      "slider-layout#demo-images"
+    ],
     "props": {
       "height": 570,
       "preload": true,
@@ -44,7 +82,6 @@
       "blockClass": "carousel"
     }
   },
-
   "rich-text#shelf-title": {
     "props": {
       "text": "## Summer",
@@ -52,11 +89,17 @@
     }
   },
   "flex-layout.row#shelf": {
-    "children": ["list-context.product-list#demo1"]
+    "children": [
+      "list-context.product-list#demo1"
+    ]
   },
   "list-context.product-list#demo1": {
-    "blocks": ["product-summary.shelf"],
-    "children": ["slider-layout#demo-products"],
+    "blocks": [
+      "product-summary.shelf"
+    ],
+    "children": [
+      "slider-layout#demo-products"
+    ],
     "props": {
       "orderBy": "OrderByTopSaleDESC"
     }
@@ -73,7 +116,6 @@
       "blockClass": "shelf"
     }
   },
-
   "info-card#home": {
     "props": {
       "id": "info-card-home",
@@ -87,14 +129,27 @@
       "textAlignment": "center"
     }
   },
-
+  "info-card#left": {
+    "title": "Vitrine Vintage Pink",
+    "props": {
+      "id": "info-card-left",
+      "isFullModeStyle": false,
+      "textPosition": "left",
+      "imageUrl": "https://appliancetheme.vteximg.com.br/arquivos/cozinha-cinza-min.png",
+      "headline": "Vintage Pink",
+      "subhead": "Give your kitchen a cool style adding warm metallic finishes.",
+      "callToActionText": "Go to Collection",
+      "callToActionUrl": "/sale/d",
+      "blockClass": "info-card-left",
+      "textAlignment": "center"
+    }
+  },
   "rich-text#question": {
     "props": {
       "text": "**This is an example store built using the VTEX platform.\nWant to know more?**",
       "blockClass": "question"
     }
   },
-
   "rich-text#link": {
     "props": {
       "text": "\n**Reach us at**\nwww.vtex.com.br",
