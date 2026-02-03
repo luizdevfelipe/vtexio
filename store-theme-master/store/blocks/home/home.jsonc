@@ -12,10 +12,36 @@
       "info-card#left",
       "flex-layout.row#test",
       "slider-layout#home",
+      "responsive-layout.desktop#desktop",
+      "responsive-layout.mobile#mobile",
       "rich-text#question",
       "rich-text#link",
       "newsletter"
     ]
+  },
+  "responsive-layout.desktop#desktop": {
+    "children": [
+      "rich-text#desktop"
+    ]
+  },
+  "responsive-layout.mobile#mobile": {
+    "children": [
+      "rich-text#mobile"
+    ]
+  },
+  "rich-text#desktop": {
+    "props": {
+      "text": "# Your Coffee, Your Way \n ### New Coffee Makers Collection (I'm on desktop)",
+      "textPosition": "CENTER",
+      "textAlignment": "CENTER"
+    }
+  },
+  "rich-text#mobile": {
+    "props": {
+      "text": "# Your Coffee, Your Way \n ### New Coffee Makers Collection (I'm on mobile)",
+      "textPosition": "CENTER",
+      "textAlignment": "CENTER"
+    }
   },
   "flex-layout.row#test": {
     "children": [
@@ -50,8 +76,6 @@
       "maxWidth": "100%"
     }
   },
-
-
   "list-context.image-list#demo": {
     "children": [
       "slider-layout#demo-images"
