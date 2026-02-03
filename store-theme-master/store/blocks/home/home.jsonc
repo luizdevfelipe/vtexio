@@ -15,6 +15,9 @@
       "responsive-layout.desktop#desktop",
       "responsive-layout.mobile#mobile",
       "tab-layout#test",
+      "modal-trigger#first",
+      "list-context.product-list#home-shelf",
+      "stack-layout#cta",
       "rich-text#question",
       "rich-text#link",
       "newsletter"
