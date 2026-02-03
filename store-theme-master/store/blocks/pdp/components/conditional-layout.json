@@ -1,0 +1,25 @@
+{
+    "condition-layout.product#bannerpdp": {
+        "props": {
+            "conditions": [
+                {
+                    "subject": "productId",
+                    "arguments": {
+                        "id": "4"
+                    }
+                }
+            ]
+        },
+        "children": [
+            "image#bannerpdp"
+        ]
+    },
+    "image#bannerpdp": {
+        "props": {
+            "src": "https://avantiinnovationclass.vtexassets.com/assets/vtex.file-manager-graphql/images/558436bf-bc37-43bc-a25b-ceb417300dd4___99ee6e4a3f7046b1975e905ec8ea3fb6.png",
+            "width": "100%",
+            "height": "300px",
+            "blockClass": "cover"
+        }
+    }
+}

@@ -1,6 +1,7 @@
 {
   "store.product": {
     "children": [
+      "condition-layout.product#bannerpdp",
       "flex-layout.row#product-breadcrumb",
       "condition-layout.product#availability",
       "flex-layout.row#description",
