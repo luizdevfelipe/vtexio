@@ -14,6 +14,7 @@
       "slider-layout#home",
       "responsive-layout.desktop#desktop",
       "responsive-layout.mobile#mobile",
+      "tab-layout#test",
       "rich-text#question",
       "rich-text#link",
       "newsletter"
