@@ -11,7 +11,15 @@
     "prereleasy": "bash lint.sh"
   },
   "credentialType": "absolute",
-  "policies": [],
+  "policies": [
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "api.github.com",
+        "path": "/*"
+      }
+    }
+  ],
   "dependencies": {
     "vtex.events-example": "0.x"
   },
