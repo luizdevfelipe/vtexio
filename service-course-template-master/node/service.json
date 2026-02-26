@@ -8,13 +8,20 @@
   "events": {
     "liveUsersUpdate": {
       "sender": "vtex.events-example",
-      "keys": ["send-event"]
+      "keys": [
+        "send-event"
+      ]
     }
   },
   "routes": {
     "analytics": {
       "path": "/_v/app/analytics/realTime",
       "public": true
+    },
+    "githubUser": {
+      "path": "/_v/github/users/:username",
+      "public": true,
+      "method": "GET"
     }
   }
 }
