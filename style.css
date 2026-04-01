@@ -258,27 +258,26 @@ body.body-cart {
     background: #F5F5F5;
 }
 
-#vtexIdUI-global-loader {
-    background-position: center !important;
+html body #vtexIdUI-global-loader {
+    background-position: center;
 }
 
-#vtexIdContainer {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    height: 100dvh !important;
-    width: 100dvw !important;
-
+html body #vtexIdContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100dvh;
+    width: 100dvw;
 }
 
-#vtexIdContainer .vtexIdUI {
-    position: absolute !important;
-    left: 50% !important;
-    top: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    margin: 0 !important;
+html body #vtexIdContainer .vtexIdUI {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
 }
 
 @media (min-width: 1200px) {
