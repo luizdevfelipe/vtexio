@@ -259,7 +259,7 @@ body.body-cart {
 }
 
 html body #vtexIdUI-global-loader {
-    background-position: center;
+    background-position: center !important;
 }
 
 html body #vtexIdContainer {
