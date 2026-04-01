@@ -258,6 +258,29 @@ body.body-cart {
     background: #F5F5F5;
 }
 
+#vtexIdUI-global-loader {
+    background-position: center !important;
+}
+
+#vtexIdContainer {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    height: 100dvh !important;
+    width: 100dvw !important;
+
+}
+
+#vtexIdContainer .vtexIdUI {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+}
+
 @media (min-width: 1200px) {
     body.body-cart .full-cart .summary-totalizers .Discounts {
         display: flex;
@@ -778,29 +801,6 @@ body.body-cart {
     body.body-cart #cart-to-orderform:after {
         content: url("https://skygroup.vtexassets.com/assets/vtex.file-manager-graphql/images/68b9ced2-7b9d-41a2-a32a-760d6b945847___7eaa9c35bf0c0e39a01506e90d44e5dd.png");
         padding-left: 10px
-    }
-
-    #vtexIdUI-global-loader {
-        background-position: center !important;
-    }
-
-    #vtexIdContainer {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        height: 100dvh !important;
-        width: 100dvw !important;
-
-    }
-
-    #vtexIdContainer .vtexIdUI {
-        position: absolute !important;
-        left: 50% !important;
-        top: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        margin: 0 !important;
     }
 }
 
