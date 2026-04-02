@@ -1,6 +1,5 @@
 /* /files/checkout5-custom.css */
 
-
 /*Apaga juridico checkout */
 #is-corporate-client {
     display: none;
@@ -9,7 +8,7 @@
 
 /* FIM Apaga Juridico checkout*/
 
-/* BotÃµes de voltar e continuar compra */
+/* Botões de voltar e continuar compra */
 
 .body-cart .container-botoes {
     max-height: 55px;
@@ -72,43 +71,41 @@
     padding-top: 0px;
 }
 
-@media (min-width:550px) {
+@media (min-width: 550px) {
     .button-continuar-comprando {
         padding: 16.5px 55px;
         font-size: 18px;
     }
 }
 
-@media (min-width:480px) {
+@media (min-width: 480px) {
     .container-botoes-centralizadora {
         padding: 0;
     }
 }
 
-@media (min-width:768px) {
+@media (min-width: 768px) {
     .container-botoes-centralizadora {
         width: 730px;
         padding: 0;
     }
 }
 
-@media (min-width:980px) {
+@media (min-width: 980px) {
     .container-botoes-centralizadora {
         width: 950px;
         padding: 0;
     }
 }
 
-@media (min-width:1200px) {
+@media (min-width: 1200px) {
     .container-botoes-centralizadora {
         width: 1200px;
         padding: 0;
     }
 }
 
-
-
-/* FIM BotÃµes de voltar e continuar compra  */
+/* FIM Botões de voltar e continuar compra  */
 
 /*CSS BARRA FRETE*/
 
@@ -199,7 +196,7 @@ body.body-cart .table.cart-items th[data-i18n="global.delivery"] {
     height: 100%;
 }
 
-@media (max-width:490px) {
+@media (max-width: 490px) {
     .compatible-container {
         justify-content: space-between;
         flex-direction: row-reverse;
@@ -303,22 +300,6 @@ html body #vtexIdContainer .vtexIdUI {
 
     body.body-cart #cart-title {
         display: none !important;
-    }
-
-    body.body-cart .container-main .checkout-container .cart-template-holder .table tr {
-        border-bottom: 1px solid #F5F5F5
-    }
-
-    body.body-cart .product-image img {
-        min-width: 120px;
-        min-height: 120px;
-        padding-right: 24px;
-    }
-
-    body.body-cart .container-main .checkout-container .cart-template-holder .table th {
-        color: #434683;
-        font-size: 12px;
-        font-weight: 400;
     }
 
     body.body-cart .container-main .checkout-container .cart-template-holder .table tr {
@@ -504,13 +485,6 @@ html body #vtexIdContainer .vtexIdUI {
         justify-content: space-between;
     }
 
-    body.body-cart .cart-active .table .srp-summary-result {
-        display: table-row;
-        display: flex;
-        width: 253px;
-        justify-content: space-between;
-    }
-
     body.body-cart .accordion-group {
         border: 0;
         display: block;
@@ -601,11 +575,6 @@ html body #vtexIdContainer .vtexIdUI {
 
     body.body-cart .cart-items .product-name a {
         color: black;
-    }
-
-
-    body.body-cart .cart-items .product-name a {
-        color: black;
         font-weight: 700;
     }
 
@@ -621,27 +590,6 @@ html body #vtexIdContainer .vtexIdUI {
         border-bottom: 0;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @media (max-width: 1200px) {
     body.body-cart .coupon-data {
@@ -803,9 +751,12 @@ html body #vtexIdContainer .vtexIdUI {
     }
 }
 
-
 @media (min-width: 980px) and (max-width: 1200px) {
     body.body-cart .full-cart .summary-totalizers {
+        width: 40%;
+    }
+
+    body.body-cart .cart-more-options {
         width: 40%;
     }
 }
@@ -826,13 +777,6 @@ html body #vtexIdContainer .vtexIdUI {
         padding: 0;
     }
 }
-
-@media (min-width: 980px) and (max-width: 1200px) {
-    body.body-cart .cart-more-options {
-        width: 40%;
-    }
-}
-
 
 body.body-order-form {
     background: #F5F5F5;
@@ -867,7 +811,6 @@ body.body-order-form .client-pre-email-h label:after {
     padding-left: 5px;
 }
 
-
 body.body-order-form .client-pre-email .emailInfo {
     display: none;
     text-align: left;
@@ -881,6 +824,10 @@ body.body-order-form .client-pre-email .emailInfo {
     margin: 0 auto;
     position: relative;
     overflow: hidden;
+}
+
+body.body-order-form .icon-lock {
+    display: none;
 }
 
 body.body-order-form .client-pre-email h3 small {
@@ -999,105 +946,12 @@ body.body-order-form .client-pre-email .btn-success:after {
     body.body-order-form .row-fluid .offset2 {
         margin-left: 9.65812% !important;
     }
-}
 
-body.body-order-form .client-pre-email .emailInfo {
-    display: none;
-    text-align: left;
-    background-color: #fcfcfc;
-    padding-left: 15px;
-    padding-right: 10px;
-    padding-bottom: 15px;
-    border: 1px solid #eee;
-    border-radius: 4px;
-    width: 35%;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
+    body.body-order-form .client-pre-email .client-email {
+        margin-left: 9.65812%;
+        width: 75.811966%;
+    }
 }
-
-body.body-order-form .icon-lock {
-    display: none;
-}
-
-body.body-order-form .client-pre-email h3 small {
-    display: none;
-    padding-left: 5px;
-    vertical-align: baseline;
-    font-size: 20px;
-    font-weight: 200;
-}
-
-body.body-order-form .client-pre-email .client-email {
-    position: relative;
-    display: flex;
-    margin-bottom: 25px;
-    justify-content: center;
-    align-items: center;
-}
-
-body.body-order-form .client-pre-email .btn-success {
-    height: 50px;
-    font-size: 16px;
-    position: static;
-    right: 2px;
-    top: 2px;
-}
-
-body.body-order-form #orderform-title {
-    display: none !important;
-}
-
-body.body-order-form .client-pre-email .btn-success {
-    display: flex;
-    border-bottom: 5px solid #EDB817;
-    color: #2C3074;
-    background: #FECB2F;
-    width: 280px;
-    height: 55px;
-    font-size: 18px;
-    position: static;
-    right: 2px;
-    top: 2px;
-    justify-content: center;
-    align-items: center;
-}
-
-body.body-order-form .client-pre-email input {
-    font-size: 15px;
-    height: 55px;
-    line-height: 100%;
-    max-width: 569px;
-    width: 100%;
-    border: 1px solid #EBEBEB;
-    margin-right: 20px;
-    padding: 20px;
-    color: #2C3074;
-}
-
-body.body-order-form .client-pre-email input::placeholder {
-    color: #2C3074;
-}
-
-body.body-order-form .client-pre-email-h label {
-    color: #2C3074;
-    font-size: 0;
-    font-weight: 700;
-    margin-top: 8%;
-    cursor: default;
-    margin-bottom: 20px;
-}
-
-body.body-order-form .client-pre-email .btn-success:before {
-    content: url("https://skygroup.vtexassets.com/assets/vtex.file-manager-graphql/images/11d5cfb6-5dc8-4abc-91ae-c70a24a41f4d___3b252fbda07e6bb00762ab22371e9174.png");
-    padding-right: 10px
-}
-
-body.body-order-form .client-pre-email .btn-success:after {
-    content: url("https://skygroup.vtexassets.com/assets/vtex.file-manager-graphql/images/68b9ced2-7b9d-41a2-a32a-760d6b945847___7eaa9c35bf0c0e39a01506e90d44e5dd.png");
-    padding-left: 10px
-}
-
 
 body.body-order-form .client-pre-email .emailInfo {
     width: 90%;
@@ -1118,41 +972,8 @@ body.body-order-form .client-pre-email .emailInfo .unstyled {
 }
 
 body.body-order-form .emailInfo:after {
-    content: url(https://skygroup.vtexassets.com/assets/vtex.file-manager-graphql/images/71559eb8-a1f3-4be4-a5ce-164ebf6f49af___fd483c6â€¦.png);
+    content: url(https://skygroup.vtexassets.com/assets/vtex.file-manager-graphql/images/71559eb8-a1f3-4be4-a5ce-164ebf6f49af___fd483c6….png);
 }
-
-@media (max-width: 490px) {
-    body.body-order-form .client-pre-email h3 span {
-        display: none;
-        font-size: 16px;
-    }
-
-    body.body-order-form .client-pre-email input {
-        margin-right: 0;
-        margin-bottom: 20px;
-    }
-
-    body.body-order-form .client-pre-email .client-email {
-        position: relative;
-        display: flex;
-        margin-bottom: 25px;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-
-    body.body-order-form .client-pre-email .btn-success {
-        width: 200px
-    }
-}
-
-@media (min-width: 980px) and (max-width: 1200px) {
-    body.body-order-form .client-pre-email .client-email {
-        margin-left: 9.65812%;
-        width: 75.811966%;
-    }
-}
-
 
 @media (min-width: 1200px) {
     body.body-order-form .emailInfo:after {
@@ -1255,7 +1076,6 @@ body.body-order-form .step.accordion-group.client-profile-data.filled {
     padding: 20px;
 }
 
-
 body.body-order-form #btn-go-to-payment {
     width: 100%;
     align-items: center;
@@ -1312,8 +1132,6 @@ body.body-order-form .icon-lock {
     display: none;
 }
 
-
-
 .skygroup-enviapecas-app-0-x-footer-pay-sec-container {
     width: 100%;
     height: 200px;
@@ -1352,7 +1170,7 @@ body.body-order-form .icon-lock {
     justify-content: flex-start;
     align-items: center;
     display: flex;
-    background-image: url(https://skygroup.vtexassets.com/assets/vtex.file-manager-graphql/images/c3bd8bb9-15bf-4f6e-85ef-4090c6cb8bab___638dd70â€¦.png);
+    background-image: url(https://skygroup.vtexassets.com/assets/vtex.file-manager-graphql/images/c3bd8bb9-15bf-4f6e-85ef-4090c6cb8bab___638dd70….png);
     background-size: contain;
     background-repeat: no-repeat;
     height: 30px;
@@ -1365,7 +1183,6 @@ body.body-order-form .icon-lock {
     background-repeat: no-repeat;
     background-position: center;
 }
-
 
 @media screen and (max-width: 479px) {
     .skygroup-enviapecas-app-0-x-footer-pay-sec-container {
@@ -1448,7 +1265,7 @@ body.body-order-form .icon-lock {
     }
 }
 
-/* INICIO ALTERAÃ‡ÃƒO PAGAMENTO DEFAULT */
+/* INICIO ALTERAÇÃO PAGAMENTO DEFAULT */
 table.table tbody.totalizers-list tr.Discounts {
     color: red;
 }
@@ -1457,7 +1274,7 @@ body.body-cart .full-cart .summary-totalizers tfoot tr {
     color: #16a016;
 }
 
-/* FIM ALTERAÃ‡ÃƒO PAGAMENTO DEFAULT */
+/* FIM ALTERAÇÃO PAGAMENTO DEFAULT */
 
 .button-continuar-comprando {
     background-color: #31a142;
