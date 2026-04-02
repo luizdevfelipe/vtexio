@@ -1,5 +1,5 @@
 {
-  "vendor": "vtex",
+  "vendor": "avantiinnovationclass",
   "name": "countdown",
   "version": "0.0.1",
   "title": "Countdown",
@@ -14,7 +14,21 @@
     "vtex.styleguide": "9.x",
     "vtex.css-handles": "0.x",
     "vtex.search-graphql": "0.x",
-    "vtex.product-context": "0.x"
+    "vtex.product-context": "0.x",
+    "vtex.apps-graphql": "3.x"
+  },
+  "settingsSchema": {
+    "title": "Countdown",
+    "type": "object",
+    "access": "public",
+    "bindingBounded": true,
+    "properties": {
+      "titleCountdown": {
+        "title": "Title Countdown",
+        "type": "string",
+        "default": "Countdown"
+      }
+    }
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }
