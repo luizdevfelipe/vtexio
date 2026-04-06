@@ -1,1 +1,1 @@
-export const helloWorld = () => ''
+export const helloworld = () => `Service number: ${Math.random()}`;
