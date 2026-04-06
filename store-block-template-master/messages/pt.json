@@ -1,5 +1,8 @@
 {
   "editor.countdown.title": "Contagem regressiva",
   "editor.countdown.description": "Componente de contagem regressiva",
-  "countdown.title": "Contagem regressiva"
+  "countdown.title": "Contagem regressiva",
+  "admin-example.navigation.label": "IO Training",
+  "admin-example.navigation.management": "Outro Exemplo",
+  "admin-example.navigation.search.kws": "mock, teste, treinamento, io"
 }
