@@ -9,7 +9,9 @@
     "messages": "1.x",
     "store": "0.x",
     "react": "3.x",
-    "admin": "0.x"
+    "admin": "0.x",
+    "node": "6.x",
+    "graphql": "2.x"
   },
   "dependencies": {
     "vtex.styleguide": "9.x",
