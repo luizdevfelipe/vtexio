@@ -1,6 +1,7 @@
-import { ClientsConfig, LRUCache, Service, ServiceContext } from '@vtex/api'
+import { ClientsConfig, LRUCache, ParamsContext, RecorderState, Service, ServiceContext } from '@vtex/api'
 
 import { Clients } from './clients'
+import { resolvers } from './resolvers'
 
 const TIMEOUT_MS = 5000
 
@@ -26,11 +27,9 @@ declare global {
 }
 
 // Export a service that defines route handlers and client options.
-export default new Service<Clients, {}>({
+export default new Service<Clients, RecorderState, ParamsContext>({
   clients,
   graphql: {
-    resolvers: {
-      Query: {},
-    },
+    resolvers: resolvers,
   },
 })
