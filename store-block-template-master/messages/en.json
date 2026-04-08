@@ -1,8 +1,8 @@
 {
-  "editor.countdown.title": "Countdown",
-  "editor.countdown.description": "Countdown component",
-  "countdown.title": "Countdown",
-  "admin-example.navigation.label": "IO Training",
-  "admin-example.navigation.management": "Other Example",
-  "admin-example.navigation.search.kws": "mock, teste, training, io"
+  "admin/editor.countdown.title": "Countdown",
+  "admin/editor.countdown.description": "Countdown component",
+  "store/countdown.title": "Countdown",
+  "admin/admin-example.navigation.label": "IO Training",
+  "admin/admin-example.navigation.management": "Other Example",
+  "admin/admin-example.navigation.search.kws": "mock, teste, training, io"
 }

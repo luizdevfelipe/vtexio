@@ -1,8 +1,8 @@
 {
-  "editor.countdown.title": "Cuenta regresiva",
-  "editor.countdown.description": "Cuenta regresiva component",
-  "countdown.title": "Cuenta regresiva",
-  "admin-example.navigation.label": "IO Training",
-  "admin-example.navigation.management": "Otra Ejemplo",
-  "admin-example.navigation.search.kws": "mock, teste, entrenamiento, io"
+  "admin/editor.countdown.title": "Cuenta regresiva",
+  "admin/editor.countdown.description": "Cuenta regresiva component",
+  "store/countdown.title": "Cuenta regresiva",
+  "admin/admin-example.navigation.label": "IO Training",
+  "admin/admin-example.navigation.management": "Otra Ejemplo",
+  "admin/admin-example.navigation.search.kws": "mock, teste, entrenamiento, io"
 }
