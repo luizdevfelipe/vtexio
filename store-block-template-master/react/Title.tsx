@@ -3,6 +3,7 @@ import { useCssHandles } from "vtex.css-handles";
 import { useQuery } from 'react-apollo'
 import getSettings from './graphql/getSettings.graphql'
 import { FormattedMessage } from 'react-intl'
+import { messages } from './messages'
 
 interface TitleProps {
   title: string;
@@ -24,7 +25,7 @@ const Title: StorefrontFunctionComponent<TitleProps> = ({ title }) => {
   }
 
   const handles = useCssHandles(CSS_HANDLES);
-  const titleText = resultParsed?.titleCountdown || title || <FormattedMessage id="countdown.title" />;
+  const titleText = resultParsed?.titleCountdown || title || <FormattedMessage id="store/countdown.title" />;
 
   return (
     <div className={`${handles.title} t-heading-2 fw3 w-100 c-muted-1 db tc`}>
@@ -34,12 +35,12 @@ const Title: StorefrontFunctionComponent<TitleProps> = ({ title }) => {
 }
 
 Title.schema = {
-  title: 'countdown.title',
-  description: 'editor.countdown.description',
+  title: messages.editorCountdownTitle,
+  description: messages.editorCountdownDescription,
   type: 'object',
   properties: {
     title: {
-      title: 'editor.countdown.title',
+      title: messages.editorCountdownTitle,
       type: 'string',
       default: null,
     },

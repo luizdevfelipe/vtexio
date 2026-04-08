@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useQuery } from 'react-apollo'
 import useProduct from 'vtex.product-context/useProduct'
 import { useCssHandles } from 'vtex.css-handles'
+import { messages } from './messages'
 
 import { TimeSplit } from './typings/global'
 import { tick, getTwoDaysFromNow } from './utils/time'
@@ -61,8 +62,8 @@ const Countdown: StorefrontFunctionComponent = () => {
 }
 
 Countdown.schema = {
-  title: 'editor.countdown.title',
-  description: 'editor.countdown.description',
+  title: messages.editorCountdownTitle,
+  description: messages.editorCountdownDescription,
   type: 'object',
   properties: {
     title: {
