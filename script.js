@@ -1,6 +1,618 @@
-/*!
- * 	Avanti Comunicação <contato@penseavanti.com.br>
- * 	copagloja
- * 	@date Wed Sep 23 2026  10:32:25 GMT-0300 (GMT-03:00)
- */
-!function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)n.d(r,o,function(t){return e[t]}.bind(null,o));return r},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=7)}([,function(e,t,n){"use strict";n.d(t,"g",(function(){return p})),n.d(t,"f",(function(){return m})),n.d(t,"b",(function(){return h})),n.d(t,"d",(function(){return v})),n.d(t,"a",(function(){return y})),n.d(t,"c",(function(){return k})),n.d(t,"e",(function(){return C}));var r="Limite por CPF",o="Para comprar este produto, faça login com um CPF cadastrado.",i="Não encontramos um CPF no seu cadastro. Atualize seus dados para continuar.",a="Você já atingiu o limite de compra deste produto para o seu CPF.",c="Não foi possível validar o limite deste produto. Tente novamente.",s=function(e){return"A quantidade disponível para o seu CPF é de ".concat(e," unidade").concat(1===e?"":"s",".")},u={},d="",l=function(e){return String(e||"").replace(/\D/g,"")};function p(e){if(e){$(".cpf-buy-limit-toast").remove();var t=$('<div class="cpf-buy-limit-toast" role="status"></div>').text(e);t.css({position:"fixed",left:"50%",bottom:"24px",zIndex:2147483647,maxWidth:"calc(100% - 32px)",padding:"14px 22px",borderRadius:"4px",background:"#2c1266",color:"#fff",fontSize:"14px",lineHeight:"1.4",textAlign:"center",transform:"translateX(-50%)",boxShadow:"0 4px 16px rgba(0,0,0,.25)"}),$("body").append(t),setTimeout((function(){return t.remove()}),6e3)}}function f(e){var t=Array.isArray(e)?e[0]:e,n=parseInt(String(t||"").replace(/\D/g,""),10);return n>0?n:0}function m(e){if(!e)return 0;var t=Object.keys(e).find((function(e){return e.trim().toLowerCase()===r.toLowerCase()}));if(t)return f(e[t]);for(var n=e.productSpecifications||[],o=0;o<n.length;o++){if(String(n[o].FieldName||n[o].Name||n[o].name||"").trim().toLowerCase()===r.toLowerCase())return f(n[o].FieldValues||n[o].Value||n[o].values)}return 0}function h(e,t){return(e&&e.items||[]).filter((function(e){return String(e.productId)===String(t)})).reduce((function(e,t){return e+Number(t.quantity||0)}),0)}function v(e,t){var n=e?"fq=productId:".concat(e):"fq=skuId:".concat(t);return u[n]?$.Deferred().resolve(u[n]).promise():$.getJSON("/api/catalog_system/pub/products/search?".concat(n)).then((function(e){var t=e&&e[0];return t&&(u[n]=t),t}))}function g(){return $.getJSON("/no-cache/profileSystem/getProfile").then((function(e){return!(!e||!e.IsUserDefined)}))}function b(){if(d)return $.Deferred().resolve(d).promise();return $.getJSON("/api/sessions?items=*").then((function(e){var t=e&&e.namespaces&&e.namespaces.profile,n=l(t&&t.document&&(t.document.value||t.document));if(11===n.length)return n;var r=t&&t.id&&(t.id.value||t.id);return r?$.getJSON("/api/io/safedata/CL/search?userId=".concat(encodeURIComponent(r),"&_fields=document")).then((function(e){return l(e&&e[0]&&e[0].document)}),(function(){return""})):""}),(function(){return""})).then((function(e){return 11===e.length?e:window.vtexjs&&vtexjs.checkout?vtexjs.checkout.getOrderForm().then((function(e){var t=l(e.clientProfileData&&e.clientProfileData.document);return 11===t.length?t:""}),(function(){return""})):$.Deferred().resolve("").promise()})).then((function(e){return 11===e.length&&(d=e),e}))}function x(e,t,n){var r,o=n?"?fresh=1":"",i="".concat((r=window.CPF_BUY_LIMIT_API||window.localStorage&&localStorage.getItem("CPF_BUY_LIMIT_API"),r?String(r).replace(/\/$/,""):"/_v/cpf-buy-limit"),"/").concat(l(e),"/").concat(t).concat(o);return $.ajax({url:i,cache:!1,timeout:8e3,dataType:"json"}).then((function(e){return{applies:!(!e||!e.applies),max:Number(e&&e.max)||0,purchased:Number(e&&e.purchased)||0,remaining:Math.max(0,Number(e&&e.remaining)||0)}}),(function(e){return $.Deferred().reject(e).promise()}))}function y(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},t=e.productId,n=e.skuId,r=e.quantity,u=void 0===r?1:r,d=e.includeCart,l=void 0===d||d,p=e.fresh,f=void 0!==p&&p,y=Math.max(1,parseInt(u,10)||1);return v(t,n).then((function(e){var n=e&&e.productId||t;return m(e)>0?g().then((function(e){return e?b().then((function(e){return e?x(e,n,f).then((function(e){return e.applies?(l?vtexjs.checkout.getOrderForm().then((function(e){return h(e,n)})):$.Deferred().resolve(0).promise()).then((function(t){var r=Math.max(0,e.remaining-t);if(r<=0)return{ok:!1,applies:!0,reason:"quota",remaining:0,quota:e,productId:n,message:a};var o=Math.min(y,r);return{ok:!0,applies:!0,quantity:o,clamped:o<y,remaining:r,quota:e,productId:n,message:o<y?s(r):""}})):{ok:!0,applies:!1,quantity:y,productId:n}}),(function(){return{ok:!1,applies:!0,reason:"fail",productId:n,message:c}})):{ok:!1,applies:!0,reason:"cpf",message:i,productId:n}})):{ok:!1,applies:!0,reason:"login",message:o,productId:n}})):{ok:!0,applies:!1,quantity:y,productId:n}}),(function(){return{ok:!0,applies:!1,quantity:y}}))}function k(e){return!e||e.ok||(p(e.message||a),"login"===e.reason&&(window.vtexid&&vtexid.start?vtexid.start():window.location.href="/login?ReturnUrl=".concat(encodeURIComponent(location.pathname+location.search)))),e}function w(e){return(e&&e.items||[]).map((function(e){return e.productId})).filter((function(e,t,n){return e&&n.indexOf(e)===t}))}function I(e,t){var n={},r=[];return(e&&e.items||[]).forEach((function(e,o){var i=t[e.productId];if(i&&i.applies){var a=Math.max(0,i.remaining-(n[e.productId]||0)),c=Math.min(e.quantity,a);n[e.productId]=(n[e.productId]||0)+c,c!==e.quantity&&r.push({index:o,quantity:c})}})),r}function j(e,t){return b().then((function(n){if(!n)return{cpf:"",quotas:{}};var r={},o=w(e),i=$.Deferred(),a=0,c=function(){if(a>=o.length)return i.resolve({cpf:n,quotas:r});var e=o[a];a+=1,v(e).then((function(o){return m(o)?x(n,e,t).then((function(t){r[e]=t,c()}),(function(){r[e]={applies:!1},c()})):(r[e]={applies:!1},c())}),(function(){r[e]={applies:!1},c()}))};return c(),i.promise()}))}function C(){var e=!1,t=function(t){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return!e&&t&&t.items&&t.items.length?(e=!0,j(t,n.fresh).then((function(e){var n=e.quotas,r={};(t.items||[]).forEach((function(e){var t=n[e.productId],o=$('.product-item[data-sku="'.concat(e.id,'"] .item-quantity-change-increment'));if(o.removeClass("cpf-buy-limit--blocked"),t&&t.applies){var i=Math.max(0,t.remaining-(r[e.productId]||0));r[e.productId]=(r[e.productId]||0)+e.quantity,e.quantity>=i&&o.addClass("cpf-buy-limit--blocked")}}));var o=I(t,n);return!o.length||vtexjs.checkout.updateItems(o,null,!1).then((function(){return p("A quantidade de um ou mais produtos foi ajustada ao limite do seu CPF."),!1}))})).then((function(t){return e=!1,t}),(function(){return e=!1,!n.strict||(p(c),!1)}))):$.Deferred().resolve(!0).promise()};$((function(){document.addEventListener("click",(function(e){var n=e.target.closest&&e.target.closest("#payment-data-submit, #cart-to-orderform");n&&"1"!==n.dataset.cpfOk?(e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation(),vtexjs.checkout.getOrderForm().then((function(e){return function(e){var t=w(e),n=[],r=$.Deferred(),o=0,i=function(){if(o>=t.length)return r.resolve(n);var e=t[o];o+=1,v(e).then((function(t){m(t)&&n.push(e),i()}),i)};return i(),r.promise()}(e).then((function(n){return!n.length||b().then((function(n){return n?t(e,{fresh:!0,strict:!0}):(p("Informe um CPF válido para continuar com este produto."),!1)}))}))})).then((function(e){!1!==e&&(n.dataset.cpfOk="1",n.click())}))):n&&delete n.dataset.cpfOk}),!0),$(window).on("orderFormUpdated.vtex",(function(e,n){return t(n)})),window.vtexjs&&vtexjs.checkout&&vtexjs.checkout.getOrderForm().then((function(e){return t(e)}))}))}},,,,,,function(e,t,n){"use strict";n.r(t);n(8),n(9);var r=n(1);Object(r.e)()},function(e,t,n){},function(e,t){var n,r;function o(){$("#cart-coupon").length?function(){$("#cart-coupon").on("input",i);var e=$("#cart-coupon")[0];if(e){var t=new MutationObserver(a);t.observe(e,{attributes:!0,childList:!0,characterData:!0})}}():setTimeout(o,500)}function i(){"139copag"==$("#cart-coupon").val().toLowerCase()?($('<span id="warning">Esse cupom não é cumulativo com outras promoções.</span>').css("position","absolute").css("top","110%").css("left","0").css("font-size","15px").css("font-weight","bold").css("color","#ff0557").insertAfter($("span.info")),$("p.coupon-fields").css("position","relative")):$(".coupon-fields").find("#warning").remove()}function a(){""==$("#cart-coupon").val()&&$(".coupon-fields").find("#warning").remove()}function c(){var e=$("#cart-dont-know-postal-code");e.length?e.attr("href","https://www.correios.com.br/busca-cep"):setTimeout(c,1e3)}function s(e){var t=e&&e.clientProfileData&&e.clientProfileData.email;if(t){var n=["m037leow@gmail.com","vitor.nishiy3@gmail.com"].some((function(e){return e.toLowerCase()===t.toLowerCase()})),r=$("#payment-submit-wrap");r.length&&(r.style.display=n?"none":"block")}}function u(e){function t(){$(".cart-select-gift-placeholder").length?($(".cart-select-gift-placeholder").show(),$("#cart-to-orderform").removeClass("colaborador")):setTimeout(t,500)}function n(){$(".cart-select-gift-placeholder").length?($(".cart-select-gift-placeholder").hide(),$("#cart-to-orderform").addClass("colaborador")):setTimeout(n,500)}!function(e){var r=[],o=!1;e.ratesAndBenefitsData&&e.ratesAndBenefitsData.rateAndBenefitsIdentifiers.forEach((function(e){e.name.toLowerCase().includes("colaborador")&&(o=!0),(e.matchedParameters["buyAndWin@Marketing"]||e.name.toLowerCase().includes("brinde"))&&r.push(e)})),o?(n(),r.length>0&&function e(t,n){var r=t,o=r.pop();$.post("/api/checkout/pub/orderForm/".concat(n.orderFormId,"/selectable-gifts/").concat(o.id),{id:o.id,selectedGifts:[]}).then((function(){t.length>0?e(r,n):vtexjs.checkout.getOrderForm(["items","ratesAndBenefitsData"])}))}(r,e)):t()}(e)}function d(){$(".full-cart .summary-totalizers").first().prepend($(".full-cart #shipping-preview-container")),$(".full-cart .summary-totalizers #shipping-preview-container").length?$(".summary-totalizers .forms.coupon-column").show():setTimeout(d,100)}function l(){var e=document.querySelector(".srp-delivery-current-many__name"),t=document.querySelector(".srp-delivery-current-many__text");if(t)if(e&&"Entrega Expressa"==e.textContent)t.querySelector(".message-expressa")||t.insertAdjacentHTML("beforeend","<div class='message-expressa'></div>");else{var n=t.querySelector(".message-expressa");n&&n.remove()}else setTimeout(l,300)}if($(window).on("orderFormUpdated.vtex",(function(e,t){s(t)})),$(window).on("hashchange",(function(){-1!==window.location.hash.indexOf("#/payment")&&window.vtexjs&&vtexjs.checkout&&vtexjs.checkout.orderForm&&s(vtexjs.checkout.orderForm)})),$("script[src^='/files/checkout6-custom.js']").length>0&&"true"==(n=window.location.href,r="lid",new URL(n).searchParams.get(r)))$("script[src^='/files/checkout6-custom.js']").remove(),$("body").append('<script type="text/javascript" src="/files/checkout6-custom-lid.js?v='.concat(Math.random(),'"><\/script>'));else{var p=function(){setTimeout((function(){var e,t=null===(e=vtexjs.checkout.orderForm)||void 0===e||null===(e=e.shippingData)||void 0===e||null===(e=e.selectedAddresses)||void 0===e||null===(e=e[0])||void 0===e?void 0:e.postalCode;t&&t!==f&&(f=t,$(".errorCepRequest").remove(),fetch("https://viacep.com.br/ws/".concat(t,"/json/")).then((function(e){return e.json()})).then((function(e){!0===e.erro||"true"===e.erro?($(".ship-postalCode").after("<span class='errorCepRequest'>CEP INVÁLIDO!</span>"),$(".vtex-omnishipping-1-x-addressForm, .vtex-omnishipping-1-x-deliveryGroup, .accept-checkbox-container, .srp-delivery-select-container").hide(),$(".btn-go-to-payment").prop("disabled",!0),$("#shipping-preview-container .srp-content").after("<span class='errorCepRequest'>CEP INVÁLIDO!</span>"),$("#cart-to-orderform").css("display","none")):($(".errorCepRequest").remove(),$(".vtex-omnishipping-1-x-addressForm, .vtex-omnishipping-1-x-deliveryGroup, .accept-checkbox-container, .srp-delivery-select-container").show(),$(".btn-go-to-payment").prop("disabled",!1),$("#cart-to-orderform").css("display","flex"))})))}),1e3)};!function(e,t){t((function(t){function n(){e.location.hash||e.location.pathname}e.onpopstate=function(e){n()},e.onload=function(){n()}}))}(window,window.jQuery),$(window).on("orderFormUpdated.vtex",(function(e,t){l(),u(t),p()})),$(window).load((function(){var e;e=setInterval((function(){if(vtexjs.checkout.orderForm.clientProfileData){clearInterval(e);var t=vtexjs.checkout.orderForm.clientProfileData.email;$.ajax({url:"/api/io/safedata/CL/search?_where=email="+t+"&_fields=email,IsBlackList,firstName,userId",type:"GET",cache:!1,async:!1,success:function(e){e[0].IsBlackList&&setInterval((function(){$("#payment-group-creditCardPaymentGroup").length>0&&($("#payment-group-creditCardPaymentGroup").remove(),$("#payment-group-bankInvoicePaymentGroup").trigger("click"))}),100)}})}}),200),p(),$(".available-gift").length>0&&(setInterval((function(){function e(){setTimeout((function(){if($(".table.cart-gift-items .checkbox-selector.icon-check-sign.active").length>0)$("a#cart-to-orderform").css("background-color","#e4244b"),$("a#cart-to-orderform").css("pointer-events","auto"),$(".aviso-brinde").remove(),$("#cart-to-orderform").removeClass("obs-brinde");else if($(".aviso-brinde").length<1){$("cart-select-gift-placeholder").prepend($("<div class='pai-aviso-brinde'><div class='aviso-brinde'> Não esqueça de escolher seu brinde </div></div>")),$("#cart-to-orderform").addClass("obs-brinde")}}),1e3)}$(".table.cart-gift-items i.checkbox-selector").on("click",(function(){e()})),e()}),1e3),clearInterval())}));var f="";$(document).ready((function(){vtexjs.checkout.getOrderForm().then((function(e){var t=[];e.items.filter((function(e,n){var r=e.productCategories[94747];if(r)return t.push({index:n,quantity:0}),r})).length>0&&$.getScript("https://unpkg.com/sweetalert/dist/sweetalert.min.js").then((function(){swal({text:"Seu carrinho contém produtos marcados como “outlet”, que podem ter um ou mais componentes faltantes e/ou pequenos defeitos. Os detalhes estão listados no anúncio do produto. Deseja realmente continuar?",icon:"warning",buttons:["NÃO","SIM"]}).then((function(e){e||(vtexjs.checkout.removeItems(t),swal('Os items marcados como "outlet" foram removidos do seu carrinho.'))}))}))})),o(),c(),d(),l(),$(".srp-delivery-select optgroup").each((function(){var e=$(this).find("option");e.text($(this).attr("label")+" - "+e.text()),$(this).parent().append(e),$(this).remove()})),window.onpopstate=function(e){$(".wrap-group").each((function(){$(this).remove()})),"#/payment"==window.location.hash&&$(".summary-template-holder").after('\n        <div class="wrap-group">\n          <div style="margin:0; padding-bottom:0" class="group-check">\n            <span style="color:#000; margin-left:0">Ao informar meus dados eu concordo com a <a style="text-decoration:underline; href="/institucional/politica-privacidade" target="_blank">Política de Privacidade</a>  e os <a href="/institucional/condicoes-de-uso" target="_blank">Termos de Uso.</a></span>\n          </div>\n        </div>\n      ')},function(){function e(){if("#/shipping"!=window.location.hash)return $(".accept-checkbox-container").remove();var t=$(".vtex-omnishipping-1-x-addressForm");if(!t.length)return setTimeout(e,300);$(".accept-checkbox-container").length||t.after('\n      <div class="accept-checkbox-container">\n        <input type="checkbox" id="address-confirm-check">\n        <div class="accept-checkbox-content">\n          <strong class="accept-checkbox-title">Tudo certo com o endereço?</strong>\n          <span class="accept-checkbox-subtitle">Dados incorretos podem causar falha na entrega e cancelamento do pedido.</span>\n        </div>\n      </div>\n    ')}$(window).on("hashchange orderFormUpdated.vtex",e),e(),$("body").on("click",".btn-go-to-payment",(function(e){var t=$(".accept-checkbox-container");if(t.length&&!t.find("input").is(":checked"))return e.preventDefault(),e.stopImmediatePropagation(),t.addClass("is-error"),t.find(".accept-checkbox-error").length||t.append('<span class="accept-checkbox-error">*Confirme os dados para seguir!</span>'),!1})),$("body").on("change","#address-confirm-check",(function(){this.checked&&$(".accept-checkbox-container").removeClass("is-error").find(".accept-checkbox-error").remove()}))}(),vtexjs.checkout.getOrderForm().then((function(e){return u(e)}));var e=!1;setInterval((function(){!e&&$("#shipping-calculate-link").is(":visible")&&($("#shipping-calculate-link").trigger("click"),e=!0)}),200)}))}}]);
+const buscaCepUrl = 'https://www.correios.com.br/busca-cep'
+
+var rdomain = 'copag' //alterar aqui
+var firstName = ''
+var lastName = ''
+var userEmail = ''
+var newUser = false
+var firstRD = true
+var idorder = ''
+
+var mycheckout = {
+  // init: function () {
+  //   vtexjs.checkout.getOrderForm().done(function (orderForm) {
+  //     var userProfileId = orderForm.userProfileId
+
+  //     idorder = orderForm.orderFormId
+
+
+  //     // descobre e-mail, nome e sobrenome
+
+  //     //novo
+  //     if (userProfileId == null) {
+  //       newUser = true
+  //       var wrap = $('.payment-confirmation-wrap')
+
+  //       if ($('.confirme-aceite', wrap).length == 0) wrap.prepend(
+  //         '<div style="display:block" class="wrap-group">' +
+  //         '<div style="margin:0; padding-bottom:0" class="group-check">' +
+  //         '<span style="color:#000; margin-left:0">Ao informar meus dados eu concordo com a <a style="text-decoration:underline; href="/institucional/politica-privacidade" target="_blank">Política de Privacidade</a>  e os <a href="/institucional/condicoes-de-uso" target="_blank">Termos de Uso.</a></span>' +
+  //         '</div>' +
+  //         '<div class="confirme-aceite group-check">' +
+  //         '<input type="checkbox" id="fcheck"><span style="color:#000">Eu concordo em receber comunicações</span>' +
+  //         '</div>' +
+  //         '</div>'
+  //       )
+
+  //       return false
+
+  //       //recorrente
+  //     } else {
+
+  //       var checked = orderForm.clientPreferencesData.optinNewsLetter
+
+  //       var button = $('.confirme-aceite')
+  //       var wrap = $('.payment-confirmation-wrap')
+  //       var mark = ''
+  //       var display = 'block'
+
+  //       if (checked) {
+  //         display = 'none'
+  //       }
+
+  //       //se for a primeira vez que chegou no checkout passa para RD
+  //       if (button.length < 1) {
+  //         wrap.prepend(
+  //           '<div style="display:' + display + '" class="wrap-group">' +
+  //           '<div style="margin:0; padding-bottom:0" class="group-check">' +
+  //           '<span style="color:#000; margin-left:0">Ao informar meus dados eu concordo com a <a style="text-decoration:underline; href="/institucional/politica-privacidade" target="_blank">Política de Privacidade</a>  e os <a href="/institucional/condicoes-de-uso" target="_blank">Termos de Uso.</a></span>' +
+  //           '</div>' +
+  //           '<div class="confirme-aceite group-check">' +
+  //           '<input type="checkbox" id="fcheck"><span style="color:#000">Eu concordo em receber comunicações</span>' +
+  //           '</div>' +
+  //           '</div>'
+  //         )
+  //       }
+
+  //       //não identificado
+  //       if (!orderForm.loggedIn) {
+
+  //         //buscar o cliente no masterdata
+  //         $.ajax({
+  //           type: 'GET',
+  //           url: 'https://lojavtex.com.br/' + rdomain + '/rd/user.php?user=' + userProfileId,
+  //           success: function (data, textStatus, xhr) {
+  //             var result = JSON.parse(data)
+
+  //             userEmail = orderForm.clientProfileData.email
+  //             firstName = result[ 0 ].firstName
+  //             lastName = result[ 0 ].lastName
+
+  //             if (firstRD) {
+  //               mycheckout.sendrd(userEmail, firstName, lastName, checked)
+  //             }
+
+  //           },
+  //           error: function (error) {
+  //             console.error('error', error)
+  //           },
+  //           complete: function () { },
+  //         })
+
+
+  //         //identificado
+  //       } else {
+  //         const orderForm = vtexjs.checkout.orderForm
+  //         userEmail = orderForm.clientProfileData.email
+  //         firstName = orderForm.clientProfileData.firstName
+  //         lastName = orderForm.clientProfileData.lastName
+
+  //         if (firstRD) {
+  //           mycheckout.sendrd(userEmail, firstName, lastName, checked)
+  //         }
+  //       }
+  //     }
+  //   })
+  // },
+
+  sendrd: function (remail, rname, rlastname, rcheck) {
+    var fields = {
+      name: rname + ' ' + rlastname,
+      email: remail,
+      isNewsletterOptIn: rcheck,
+      identifier: 'Chegou no checkout'
+    }
+
+    firstRD = false
+
+
+    $.ajax({
+      type: 'POST',
+      url: 'https://lojavtex.com.br/' + rdomain + '/rd/check.php',
+      data: fields,
+      success: function (data, textStatus, xhr) {
+        firstRD = false
+        mycheckout.createCookie('_rdc', encodeURI(rname) + ' ' + encodeURI(rlastname) + '-' + rcheck, 1)
+
+      },
+      error: function (error) {
+        console.error('error', error)
+      },
+      complete: function () { },
+    })
+  },
+
+  event: function () {
+    $('body').on('change', '#opt-in-newsletter', function () {
+
+      //passa para RD
+      if (newUser) {
+        userEmail = $('input#client-email').val()
+        firstName = $('#client-first-name').val()
+        lastName = $('#client-last-name').val()
+      }
+
+      var isNewsletterOptIn = false
+
+      // para todos
+      if ($(this).is(':checked')) {
+        isNewsletterOptIn = true
+      }
+
+      mycheckout.sendrd(userEmail, firstName, lastName, isNewsletterOptIn)
+
+    })
+
+    $('body').on('change', '#fcheck', function () {
+
+      var isNewsletterOptIn = false
+
+      // para todos
+      if ($(this).is(':checked')) {
+        isNewsletterOptIn = true
+      }
+      if (newUser) {
+        userEmail = $('input#client-email').val()
+        firstName = $('#client-first-name').val()
+        lastName = $('#client-last-name').val()
+      }
+
+      mycheckout.sendrd(userEmail, firstName, lastName, isNewsletterOptIn)
+
+      var fieldsVtex = {
+        locale: 'pt-BR',
+        optinNewsLetter: isNewsletterOptIn,
+      }
+      $.ajax({
+        type: 'POST',
+        url: '/api/checkout/pub/orderForm/' + idorder + '/attachments/clientPreferencesData',
+        data: JSON.stringify(fieldsVtex),
+        success: function (data, textStatus, xhr) {
+        },
+        error: function (error) {
+          console.error('error', error)
+        },
+        complete: function () { },
+      })
+    })
+  },
+
+  createCookie: function (name, value, days) {
+    var expires = ''
+
+    if (days) {
+      var date = new Date()
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
+      expires = '; expires=' + date.toUTCString()
+    }
+    document.cookie = name + '=' + value + expires + '; path=/'
+  },
+
+  readCookie: function (name) {
+    var nameEQ = name + '='
+    var ca = document.cookie.split(';')
+
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i]
+      while (c.charAt(0) == ' ') c = c.substring(1, c.length)
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length)
+    }
+    return null
+  },
+
+  removeCookie: function (name) {
+    mycheckout.createCookie(name, '', -1)
+  }
+}
+function getUrlParam(url, param) {
+  return new URL(url).searchParams.get(param)
+}
+function findCouponInput() {
+  if ($('#cart-coupon').length) {
+    couponWarningConfig()
+  } else {
+    setTimeout(findCouponInput, 500)
+  }
+}
+function couponWarningConfig() {
+  $('#cart-coupon').on('input', handleCouponWarning)
+  var target = $('#cart-coupon')[0]
+  if (target) {
+    var observer = new MutationObserver(handleRemoveCouponWarning)
+    var config = {
+      attributes: true,
+      childList: true,
+      characterData: true,
+    }
+    observer.observe(target, config)
+  }
+}
+function handleCouponWarning() {
+  if ($('#cart-coupon').val().toLowerCase() == '139copag') {
+    $('<span id="warning">Esse cupom não é cumulativo com outras promoções.</span>').css('position', 'absolute').css('top', '110%').css('left', '0').css('font-size', '15px').css('font-weight', 'bold').css('color', '#ff0557').insertAfter($('span.info'))
+    $('p.coupon-fields').css('position', 'relative')
+  } else {
+    $('.coupon-fields').find('#warning').remove()
+  }
+}
+function handleRemoveCouponWarning() {
+  if ($('#cart-coupon').val() == '') $('.coupon-fields').find('#warning').remove()
+}
+function changeCorreiosUrl() {
+  const linkBusca = $('#cart-dont-know-postal-code')
+  if (linkBusca.length) {
+    linkBusca.attr('href', buscaCepUrl)
+  } else {
+    setTimeout(changeCorreiosUrl, 1000)
+  }
+}
+function alertOutletProduct() {
+  const outletCategoryId = 94747
+  vtexjs.checkout.getOrderForm().then((orderForm) => {
+    const itemsToRemove = []
+    const { items } = orderForm
+    const outletItems = items.filter((item, index) => {
+      const outletItem = item.productCategories[outletCategoryId]
+      if (outletItem) {
+        itemsToRemove.push({
+          index,
+          quantity: 0,
+        })
+        return outletItem
+      }
+    })
+    if (outletItems.length > 0) {
+      $.getScript('https://unpkg.com/sweetalert/dist/sweetalert.min.js').then(function () {
+        swal({
+          text: 'Seu carrinho contém produtos marcados como “outlet”, que podem ter um ou mais componentes faltantes e/ou pequenos defeitos. Os detalhes estão listados no anúncio do produto. Deseja realmente continuar?',
+          icon: 'warning',
+          buttons: ['NÃO', 'SIM'],
+        }).then((confirm) => {
+          if (!confirm) {
+            vtexjs.checkout.removeItems(itemsToRemove)
+            swal('Os items marcados como "outlet" foram removidos do seu carrinho.')
+          }
+        })
+      })
+    }
+  })
+}
+function checkIsBlacklisted() {
+  const waitLoadUserdata = setInterval(() => {
+    var hasUserData = vtexjs.checkout.orderForm.clientProfileData
+    if (hasUserData) {
+      clearInterval(waitLoadUserdata)
+      const userEmail = vtexjs.checkout.orderForm.clientProfileData.email
+      $.ajax({
+        url: "/api/io/safedata/CL/search?_where=email=" + userEmail + "&_fields=email,IsBlackList,firstName,userId",
+        type: "GET",
+        cache: false,
+        async: false,
+        success: (response) => {
+          let isBlacklisted = response[0].IsBlackList
+          if (isBlacklisted) {
+            const waitFormLoad = setInterval(() => {
+              let formLoaded = $('#payment-group-creditCardPaymentGroup').length > 0
+              if (formLoaded) {
+                $('#payment-group-creditCardPaymentGroup').remove()
+                $('#payment-group-bankInvoicePaymentGroup').trigger('click')
+              }
+            }, 100);
+          }
+        }
+      })
+    }
+  }, 200);
+}
+function blockBlacklistedEmail(orderForm) {
+  console.log('blockBlacklistedEmail', orderForm)
+  var blackList = [
+    'm037leow@gmail.com',
+    'vitor.nishiy3@gmail.com',
+  ]
+  
+  var email = orderForm && orderForm.clientProfileData && orderForm.clientProfileData.email
+  if (!email) return
+
+  console.log('email', email)
+
+  var isBlocked = blackList.some(function (blocked) {
+    return blocked.toLowerCase() === email.toLowerCase()
+  })
+
+  console.log('isBlocked', isBlocked)
+
+  var $submitWrapper = $('#payment-submit-wrap')
+  console.log('submitWrapper', $submitWrapper)
+
+  if (!$submitWrapper.length) return
+
+  if (isBlocked) {
+    $submitWrapper.style.display = 'none'
+  } else {
+    $submitWrapper.style.display = 'block'
+  }
+}
+
+$(window).on('orderFormUpdated.vtex', function (evt, orderForm) {
+  console.log('orderFormUpdated.vtex Blacklisted Email', orderForm)
+  blockBlacklistedEmail(orderForm)
+})
+
+$(window).on('hashchange', function () {
+  if (window.location.hash.indexOf('#/payment') === -1) return
+  if (window.vtexjs && vtexjs.checkout && vtexjs.checkout.orderForm) {
+    console.log('hashchange Blacklisted Email', vtexjs.checkout.orderForm)
+    blockBlacklistedEmail(vtexjs.checkout.orderForm)
+  }
+})
+function showLGPDWarning() {
+  window.onpopstate = function (event) {
+    $('.wrap-group').each(function () {
+      $(this).remove()
+    })
+    if (window.location.hash == '#/payment') {
+      let htmlTemplate = `
+        <div class="wrap-group">
+          <div style="margin:0; padding-bottom:0" class="group-check">
+            <span style="color:#000; margin-left:0">Ao informar meus dados eu concordo com a <a style="text-decoration:underline; href="/institucional/politica-privacidade" target="_blank">Política de Privacidade</a>  e os <a href="/institucional/condicoes-de-uso" target="_blank">Termos de Uso.</a></span>
+          </div>
+        </div>
+      `
+      $('.summary-template-holder').after(htmlTemplate)
+    }
+  }
+}
+function showAddressConfirm() {
+  function render() {
+    if (window.location.hash != '#/shipping') return $('.accept-checkbox-container').remove()
+    const $form = $('.vtex-omnishipping-1-x-addressForm')
+    if (!$form.length) return setTimeout(render, 300)
+    if ($('.accept-checkbox-container').length) return
+    $form.after(`
+      <div class="accept-checkbox-container">
+        <input type="checkbox" id="address-confirm-check">
+        <div class="accept-checkbox-content">
+          <strong class="accept-checkbox-title">Tudo certo com o endereço?</strong>
+          <span class="accept-checkbox-subtitle">Dados incorretos podem causar falha na entrega e cancelamento do pedido.</span>
+        </div>
+      </div>
+    `)
+  }
+  $(window).on('hashchange orderFormUpdated.vtex', render)
+  render()
+  $('body').on('click', '.btn-go-to-payment', function (e) {
+    const $box = $('.accept-checkbox-container')
+    if (!$box.length || $box.find('input').is(':checked')) return
+    e.preventDefault()
+    e.stopImmediatePropagation()
+    $box.addClass('is-error')
+    if (!$box.find('.accept-checkbox-error').length) {
+      $box.append('<span class="accept-checkbox-error">*Confirme os dados para seguir!</span>')
+    }
+    return false
+  })
+  $('body').on('change', '#address-confirm-check', function () {
+    if (!this.checked) return
+    $('.accept-checkbox-container').removeClass('is-error').find('.accept-checkbox-error').remove()
+  })
+}
+function removeGiftColaboradores(orderform) {
+  function removeGift(orderform) {
+    let gifts = []
+    let isColaborador = false
+    orderform.ratesAndBenefitsData &&
+      orderform.ratesAndBenefitsData.rateAndBenefitsIdentifiers.forEach((benefit) => {
+        if (benefit.name.toLowerCase().includes('colaborador')) isColaborador = true
+        if (benefit.matchedParameters['buyAndWin@Marketing'] || benefit.name.toLowerCase().includes('brinde')) gifts.push(benefit)
+      })
+    if (!isColaborador) showGiftList()
+    else {
+      hideGiftList()
+      if (gifts.length > 0) {
+        removeGiftAsync(gifts, orderform)
+      }
+    }
+  }
+  function removeGiftAsync(gifts, orderform) {
+    const remainingGifts = gifts
+    const gift = remainingGifts.pop()
+    $.post(`/api/checkout/pub/orderForm/${orderform.orderFormId}/selectable-gifts/${gift.id}`, { id: gift.id, selectedGifts: [] }).then(() => {
+      if (gifts.length > 0) removeGiftAsync(remainingGifts, orderform)
+      else vtexjs.checkout.getOrderForm(['items', 'ratesAndBenefitsData'])
+    })
+  }
+  function showGiftList() {
+    if ($('.cart-select-gift-placeholder').length) {
+      $('.cart-select-gift-placeholder').show()
+      $('#cart-to-orderform').removeClass('colaborador')
+    } else setTimeout(showGiftList, 500)
+  }
+  function hideGiftList() {
+    if ($('.cart-select-gift-placeholder').length) {
+      $('.cart-select-gift-placeholder').hide()
+      $('#cart-to-orderform').addClass('colaborador')
+    } else setTimeout(hideGiftList, 500)
+  }
+  removeGift(orderform)
+}
+function moveShipping() {
+  $('.full-cart .summary-totalizers').first().prepend($('.full-cart #shipping-preview-container'))
+  if (!$('.full-cart .summary-totalizers #shipping-preview-container').length) setTimeout(moveShipping, 100)
+  else {
+    $('.summary-totalizers .forms.coupon-column').show()
+  }
+}
+function showShippingMessage() {
+  const shippingNameContainer = document.querySelector('.srp-delivery-current-many__name')
+  const shippingCurrentContainer = document.querySelector('.srp-delivery-current-many__text')
+  if (shippingCurrentContainer) {
+    if (shippingNameContainer && shippingNameContainer.textContent == 'Entrega Expressa') {
+      if (!shippingCurrentContainer.querySelector('.message-expressa')) shippingCurrentContainer.insertAdjacentHTML('beforeend', "<div class='message-expressa'></div>")
+    } else {
+      const shippingMessageContainer = shippingCurrentContainer.querySelector('.message-expressa')
+      if (shippingMessageContainer) shippingMessageContainer.remove()
+    }
+  } else setTimeout(showShippingMessage, 300)
+}
+function changeShippingDisplay() {
+  $('.srp-delivery-select optgroup').each(function () { const option = $(this).find('option'); option.text($(this).attr('label') + ' - ' + option.text()); $(this).parent().append(option); $(this).remove() })
+}
+if ($("script[src^='/files/checkout6-custom.js']").length > 0 && getUrlParam(window.location.href, 'lid') == 'true') {
+  $("script[src^='/files/checkout6-custom.js']").remove()
+  $('body').append(`<script type="text/javascript" src="/files/checkout6-custom-lid.js?v=${Math.random()}"></script>`)
+} else {
+  (function (window, jQuery) {
+    jQuery(function ($) {
+
+      function Step1() {
+
+      }
+
+      function Step2() {
+
+      }
+
+      function Step3() {
+
+      }
+
+      function Step4() {
+
+      }
+
+      function Step5() {
+
+      }
+
+      function Progress() {
+        switch (window.location.hash || window.location.pathname) {
+          case '#/cart':
+            Step1()
+            break
+          case '#/email':
+
+            Step2()
+            break
+          case '#/profile':
+            Step3()
+            break
+          case '#/shipping':
+            Step3()
+            break
+          case '#/payment':
+            Step4()
+            break
+          case '/checkout/orderPlaced/':
+            Step5()
+            break
+        }
+      }
+
+      window.onpopstate = function (event) {
+        Progress()
+      }
+
+      window.onload = function () {
+        Progress()
+      }
+
+    })
+
+  })(window, window.jQuery)
+
+
+  $(window).on('orderFormUpdated.vtex', (event, orderform) => {
+    showShippingMessage()
+    removeGiftColaboradores(orderform)
+    checkCep()
+  })
+
+  $(window).load(function () {
+    checkIsBlacklisted()
+    checkCep()
+    if ($('.available-gift').length > 0) {
+      setInterval(function () {
+        function verificaBrinde() {
+          setTimeout(function () {
+            if ($('.table.cart-gift-items .checkbox-selector.icon-check-sign.active').length > 0) {
+              $('a#cart-to-orderform').css('background-color', '#e4244b')
+              $('a#cart-to-orderform').css('pointer-events', 'auto')
+              $('.aviso-brinde').remove()
+              $('#cart-to-orderform').removeClass('obs-brinde')
+            } else {
+              if ($('.aviso-brinde').length < 1) {
+                var avisoBrinde = "<div class='pai-aviso-brinde'><div class='aviso-brinde'> Não esqueça de escolher seu brinde </div></div>"
+                $('cart-select-gift-placeholder').prepend($(avisoBrinde))
+                $('#cart-to-orderform').addClass('obs-brinde')
+              }
+            }
+          }, 1000)
+        }
+
+        $('.table.cart-gift-items i.checkbox-selector').on('click', function () {
+          verificaBrinde()
+        })
+        verificaBrinde()
+      }, 1000)
+      clearInterval()
+    }
+  })
+
+  // cep validation
+  let lastCheckedCep = ''
+  function checkCep() {
+    setTimeout(() => {
+      const cep = vtexjs.checkout.orderForm?.shippingData?.selectedAddresses?.[0]?.postalCode
+      if (!cep || cep === lastCheckedCep) return
+      lastCheckedCep = cep
+      $('.errorCepRequest').remove()
+      fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.erro === true || data.erro === 'true') {
+            $('.ship-postalCode').after("<span class='errorCepRequest'>CEP INVÁLIDO!</span>")
+            $('.vtex-omnishipping-1-x-addressForm, .vtex-omnishipping-1-x-deliveryGroup, .accept-checkbox-container, .srp-delivery-select-container').hide()
+            $('.btn-go-to-payment').prop('disabled', true)
+            $('#shipping-preview-container .srp-content').after("<span class='errorCepRequest'>CEP INVÁLIDO!</span>")
+            $('#cart-to-orderform').css('display', 'none')
+          } else {
+            $('.errorCepRequest').remove()
+            $('.vtex-omnishipping-1-x-addressForm, .vtex-omnishipping-1-x-deliveryGroup, .accept-checkbox-container, .srp-delivery-select-container').show()
+            $('.btn-go-to-payment').prop('disabled', false)
+            $('#cart-to-orderform').css('display', 'flex')
+          }
+        })
+    }, 1000)
+  }
+
+  $(document).ready(function () {
+    alertOutletProduct()
+    findCouponInput()
+    changeCorreiosUrl()
+    moveShipping()
+    showShippingMessage()
+    changeShippingDisplay()
+    showLGPDWarning()
+    showAddressConfirm()
+    vtexjs.checkout.getOrderForm().then((orderform) => removeGiftColaboradores(orderform))
+    let autoCalcDone = false
+    setInterval(() => {
+      if (!autoCalcDone && $('#shipping-calculate-link').is(':visible')) {
+        $('#shipping-calculate-link').trigger('click')
+        autoCalcDone = true
+      }
+    }, 200)
+  })
+}
+
